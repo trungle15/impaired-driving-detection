@@ -4,6 +4,10 @@ import os
 from sklearn.preprocessing import LabelEncoder
 import torch
 
+import utils
+
+from utils.constants import OVERLAP_SAMPLES, NON_OVERLAP_SAMPLES
+
 def clean_unnamed(df):
     df.drop(["Unnamed: 0"], axis = 1, inplace = True)
     return df
@@ -36,14 +40,14 @@ def split_features_targets(df, return_tensor = False):
     return features, targets
         
 def load_interstate_data(paradigm, return_feature_target = True,  **kwargs):
-    path = ('./data/full_interstate_not_alcohol/current_samples/60_frames_per_second')
     if paradigm == 'overlap':
-        df = pd.read_csv(path + '/full_interstate_60s_overlap.csv')
+        df = pd.read_csv(OVERLAP_SAMPLES)
     elif paradigm == 'non_overlap':
-        df = pd.read_csv(path + '/full_interstate_60s_non_overlap.csv')
+        df = pd.read_csv(NON_OVERLAP_SAMPLES)
     df = clean_unnamed(df)
     if return_feature_target:
         features, targets = split_features_targets(df, **kwargs)
         return features, targets
     else: 
         return df
+    
