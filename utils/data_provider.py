@@ -44,6 +44,8 @@ def load_interstate_data(paradigm, return_feature_target = True,  **kwargs):
         df = pd.read_csv(OVERLAP_SAMPLES)
     elif paradigm == 'non_overlap':
         df = pd.read_csv(NON_OVERLAP_SAMPLES)
+    else:
+        raise KeyError("Please use 'non_overlap' or 'overlap")
     df = clean_unnamed(df)
     if return_feature_target:
         features, targets = split_features_targets(df, **kwargs)
