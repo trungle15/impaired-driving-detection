@@ -30,7 +30,7 @@ def CNN_train_val_loop(archs, dls, epochs):
         results.loc[i] = [arch.__name__, k, count_parameters(model), vals[0], vals[1], vals[2], vals[3], vals[4], int(elapsed)]
         clear_output()
         display(results)
-    return results
+    #return results
     
 
 
