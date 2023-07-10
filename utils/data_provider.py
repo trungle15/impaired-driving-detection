@@ -14,7 +14,7 @@ def clean_unnamed(df):
     return df
 
 def extract_features(df):
-    features = df.drop(['Non_Overlap_Sample', 'DosingLevel', 'VDS.Veh.Heading.Fixed', 'Subject', 'DaqName'], axis = 1)
+    features = df.drop(['Non_Overlap_Sample', 'DosingLevel', 'VDS.Veh.Heading.Fixed', 'Subject'], axis = 1)
     return features
 
 def recode_target(df):
