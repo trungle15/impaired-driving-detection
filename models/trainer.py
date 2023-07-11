@@ -3,7 +3,7 @@ from tsai.all import *
 
 import utils
 from utils.data_provider import load_interstate_data, convert_to_L
-from utils.data_splitter import train_val_split_indices
+from utils.data_splitter import train_val_split_indices, _mkdirs_if_not_exist
 from utils.constants import RESULTS_DIR
 
 import os
@@ -40,6 +40,7 @@ def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, sav
         clear_output()
         display(results)
     if save_results:
+        _mkdirs_if_not_exist(RESULTS_DIR)
         filename = f'{model.__class__.__name__}_{paradigm}_{epochs}e_{random_state}rs_results.csv'
         filepath = join(RESULTS_DIR, filename)
         results.to_csv(filepath)
