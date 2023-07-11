@@ -3,6 +3,7 @@ from os.path import join, dirname, abspath
 ## DIRS AND FILEPATHS
 DATA_DIR = join(dirname(dirname(abspath(__file__))), 'data')
 METADATA_DIR = join(dirname(dirname(abspath(__file__))), 'metadata')
+RESULTS_DIR = join(dirname(dirname(abspath(__file__))), 'results')
 
 INTERSTATE_DIR = join(DATA_DIR, 'full_interstate_not_alcohol' ,'current_samples' ,'60_frames_per_second')
 OVERLAP_SAMPLES = join(INTERSTATE_DIR, 'full_interstate_60s_overlap.csv')
@@ -17,3 +18,5 @@ SPLIT_AGRS_NAMES = {
     "individual-specific": "a",
     "individual-agnostic": "b"
 }
+
+RESULTS_DIR = join(dirname(dirname(abspath(__file__))), 'results')
