@@ -19,7 +19,7 @@ def extract_features(df):
 
 def recode_target(df):
     targets = df['DosingLevel']
-    targets_reduced = ['Not Dosed' if target == 'XP' else 'Dosed' for target in targets]
+    targets_reduced = ['Not Dosed' if target == 'XP' else 'THC-Dosed' for target in targets]
     encoder = LabelEncoder()
     encoded_targets = encoder.fit_transform(targets_reduced)
     encoded_targets = encoded_targets[::3600]
