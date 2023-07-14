@@ -80,9 +80,9 @@ def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, sav
     else: 
         raw_results.to_csv(join(RAW_PRED_DIR, f'{model.__class__.__name__}_{paradigm}_{epochs}e_{random_state}rs_results.csv'))
 
-def _save_result_table(results, model, paradigm, epochs, random_state):
-    filename = f'{model.__class__.__name__}_{paradigm}_{epochs}e_{random_state}rs_results.csv'
-    filepath = join(RESULTS_DIR, filename)
+def _save_result_table(results, arch, paradigm, epochs, random_state):
+    filename = f'{arch}_{paradigm}_{epochs}e_{random_state}rs_results.csv'
+    filepath = join(AGG_TABLE_DIR, filename)
     results.to_csv(filepath)
     
 def _save_raw_preds(loop_no,split_idxs, proba, targets, preds):

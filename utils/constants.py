@@ -28,5 +28,5 @@ RAW_PRED_DIR = join(RESULTS_DIR, 'raw_pred')
 
 
 # MODEL PATH
-MODEL_DIR = join(ROOT, 'model')
+MODEL_DIR = join(ROOT, 'models')
 BESTMODEL_PATH = join(MODEL_DIR, 'bestmodel.pth')
