@@ -21,7 +21,11 @@ SPLIT_AGRS_NAMES = {
     "individual-agnostic": "b"
 }
 
+# RESULTS and RAW PREDS
 RESULTS_DIR = join(ROOT, 'results')
+AGG_TABLE_DIR = join(RESULTS_DIR, 'agg_table')
+RAW_PRED_DIR = join(RESULTS_DIR, 'raw_pred')
+
 
 # MODEL PATH
 MODEL_DIR = join(ROOT, 'model')
