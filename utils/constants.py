@@ -1,9 +1,11 @@
 from os.path import join, dirname, abspath
 
 ## DIRS AND FILEPATHS
-DATA_DIR = join(dirname(dirname(abspath(__file__))), 'data')
-METADATA_DIR = join(dirname(dirname(abspath(__file__))), 'metadata')
-RESULTS_DIR = join(dirname(dirname(abspath(__file__))), 'results')
+ROOT = dirname(dirname(abspath(__file__)))
+
+DATA_DIR = join(ROOT, 'data')
+METADATA_DIR = join(ROOT, 'metadata')
+RESULTS_DIR = join(ROOT, 'results')
 
 INTERSTATE_DIR = join(DATA_DIR, 'full_interstate_not_alcohol' ,'current_samples' ,'60_frames_per_second')
 OVERLAP_SAMPLES = join(INTERSTATE_DIR, 'full_interstate_60s_overlap.csv')
@@ -19,4 +21,8 @@ SPLIT_AGRS_NAMES = {
     "individual-agnostic": "b"
 }
 
-RESULTS_DIR = join(dirname(dirname(abspath(__file__))), 'results')
+RESULTS_DIR = join(ROOT, 'results')
+
+# MODEL PATH
+MODEL_DIR = join(ROOT, 'model')
+BESTMODEL_PATH = join(MODEL_DIR, 'bestmodel.pth')
