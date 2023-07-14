@@ -31,7 +31,7 @@ def create_dls_list(index, X, y, tfms, batch_tfms):
 
 ### This section is for CNN-based classifier
 def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, save_results = False, save_raw_preds = False):
-    results = pd.DataFrame(columns=['arch', 'train loss', 'valid loss', 'accuracy', 'f1_score', 'auc', 'precision', 'recall', 'specificity' , 'time'])
+    results = pd.DataFrame(columns=['arch', 'valid loss', 'accuracy', 'f1_score', 'auc', 'precision', 'recall', 'specificity' , 'time'])
     _mkdirs_if_not_exist(RESULTS_DIR)
     
     raw_results = pd.DataFrame(columns=['loop_no', 'split_idx', 'pos_class_proba', 'target'])
@@ -58,7 +58,7 @@ def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, sav
         
         # Results
         results.loc[i] = [arch.__name__, vals[0], vals[1], vals[2], vals[3], 
-                          vals[4], vals[5], vals[6], vals[7], int(elapsed)]
+                          vals[4], vals[5], vals[6], int(elapsed)]
         clear_output()
         display(results)
         
@@ -109,9 +109,3 @@ def _delete_model_path(filepath):
         os.remove(filepath)
     else:
         print(f"Error: {filepath} not found" )
-
-
-
-    
-
-
