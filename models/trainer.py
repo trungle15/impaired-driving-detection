@@ -69,7 +69,7 @@ def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, sav
         if save_raw_preds:
             _mkdirs_if_not_exist(RAW_PRED_DIR)
             raw_pred_i = _save_raw_preds(loop_no=i, split_idxs= learn.dls.valid.dataset.split_idxs, 
-                                         preds_probas = probas, targets = targets, preds = preds)
+                                         probas = probas, targets = targets, preds = preds)
             raw_results = raw_results.append(raw_pred_i, ignore_index=True)
     if save_results: 
         _mkdirs_if_not_exist(AGG_TABLE_DIR)
