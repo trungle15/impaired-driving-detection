@@ -109,3 +109,42 @@ def _delete_model_path(filepath):
         os.remove(filepath)
     else:
         print(f"Error: {filepath} not found" )
+        
+        
+def get_X_minirocket_features_list(X, split_idxs):
+    X_feat_list = []
+    for i, split in enumerate(split_idxs):
+        mrf = MiniRocketFeatures(X.shape[1], X.shape[2]).to(default_device())
+        X_train = X[split_idxs[i][0]]
+        mrf.fit(X_train)
+        X_feat = get_minirocket_features(X, mrf, chunksize=1024, to_np=True)
+        X_feat_list.append(X_feat)
+    X_feat_array = np.stack(X_feat_list, axis = 0)
+    return X_feat_array
+
+
+def create_mr_dls_list(index, X_feat_array, y, tfms, batch_tfms, bs):
+    index_L = convert_to_L(index)
+    dls = []
+    
+    for i, idx in enumerate(index_L):
+        dl = get_ts_dls(X_feat_array[i], y,
+                        splits = index_L[i],
+                        tfms = tfms,
+                        batch_tfms = batch_tfms,
+                        bs = bs)
+        dls.append(dl)
+    return dls  
+
+
+# for ten splits:
+
+# index: same
+# dataloaders: different
+
+# function to get a list of X_features of whole dataset [10, sample_size, features, 1]
+
+
+
+# function to get dls for minirocket for each X_features
+
