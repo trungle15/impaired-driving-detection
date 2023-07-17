@@ -30,7 +30,7 @@ def create_dls_list(index, X, y, tfms, batch_tfms):
 # done manually
 
 ### This section is for CNN-based classifier
-def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, save_results = False, save_raw_preds = False):
+def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, save_results = False, save_raw_preds = False, wd = None):
     results = pd.DataFrame(columns=['arch', 'valid loss', 'accuracy', 'f1_score', 'auc', 'precision', 'recall', 'specificity' , 'time'])
     _mkdirs_if_not_exist(RESULTS_DIR)
     
@@ -41,7 +41,7 @@ def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, sav
         # Model definition
         model = create_model(arch, dls=dls[i], **k)  
         print(model.__class__.__name__)
-        learn = Learner(dls[i], model, metrics=[accuracy, F1Score(), RocAucBinary(), Precision(), Recall(), Fastai_Specificity()],
+        learn = Learner(dls[i], model, metrics=[accuracy, F1Score(), RocAucBinary(), Precision(), Recall(), Fastai_Specificity()], wd = wd,
                         cbs=[EarlyStoppingCallback(monitor='valid_loss', min_delta=0, patience=50),
                              SaveModelCallback(monitor='valid_loss', comp=np.less, fname='bestmodel')])  # Use the ith dataloader
         
@@ -134,17 +134,4 @@ def create_mr_dls_list(index, X_feat_array, y, tfms, batch_tfms, bs):
                         batch_tfms = batch_tfms,
                         bs = bs)
         dls.append(dl)
-    return dls  
-
-
-# for ten splits:
-
-# index: same
-# dataloaders: different
-
-# function to get a list of X_features of whole dataset [10, sample_size, features, 1]
-
-
-
-# function to get dls for minirocket for each X_features
-
+    return dls
