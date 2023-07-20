@@ -137,9 +137,17 @@ def create_mr_dls_list(index, X_feat_array, y, tfms, batch_tfms, bs):
         dls.append(dl)
     return dls
 
-wd_list = [1,3,4]
+
 
 def mr_hyperparam_search(archs, dls, epochs, wd_list):
+    results = []
     for wd in wd_list:
+        print(f"Weight Decay: {wd}")
         result = CNN_train_val_loop(archs, dls, epochs, wd)
+        avg_valid_loss = result['valid loss'].mean()
+        results.append({
+            'weight_decay': wd,
+            'avg_valid_loss': avg_valid_loss
+        })
+    return results
         
