@@ -79,6 +79,7 @@ def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, sav
         del raw_results
     else: 
         raw_results.to_csv(join(RAW_PRED_DIR, f'{model.__class__.__name__}_{paradigm}_{epochs}e_{random_state}rs_results.csv'))
+    return results
 
 def _save_result_table(results, arch, paradigm, epochs, random_state):
     filename = f'{arch}_{paradigm}_{epochs}e_{random_state}rs_results.csv'
@@ -135,3 +136,10 @@ def create_mr_dls_list(index, X_feat_array, y, tfms, batch_tfms, bs):
                         bs = bs)
         dls.append(dl)
     return dls
+
+wd_list = [1,3,4]
+
+def mr_hyperparam_search(archs, dls, epochs, wd_list):
+    for wd in wd_list:
+        result = CNN_train_val_loop(archs, dls, epochs, wd)
+        
