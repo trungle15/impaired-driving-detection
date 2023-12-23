@@ -30,7 +30,7 @@ def create_dls_list(index, X, y, tfms, batch_tfms):
 # done manually
 
 ### This section is for CNN-based classifier
-def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, save_results = False, save_raw_preds = False, wd = None):
+def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, save_results = False, save_raw_preds = False, wd = None, delete_best_model = True):
     results = pd.DataFrame(columns=['arch', 'valid loss', 'accuracy', 'f1_score', 'auc', 'precision', 'recall', 'specificity' , 'time'])
     _mkdirs_if_not_exist(RESULTS_DIR)
     
@@ -62,8 +62,9 @@ def CNN_train_val_loop(archs, dls, epochs, paradigm=None, random_state=None, sav
         clear_output()
         display(results)
         
-        # Delete bestmodel in this loop since we don't need this
-        _delete_model_path(BESTMODEL_PATH)
+        # Delete bestmodel
+        if delete_best_model: 
+            _delete_model_path(BESTMODEL_PATH)
         
         # Save raw preds:
         if save_raw_preds:
